@@ -14,7 +14,8 @@ class Thompson:
             'STAR':self.handle_rep,# [*]
             'PLUS':self.handle_rep,# [+]
             'QMARK':self.handle_qmark }# [?]}
-
-print(" whatever this is:" +  "\x08")
-
-print("\x3F" == "?")
+"""
+n = 20
+p = 'a?' * n + 'a' * n
+print(p)
+"""

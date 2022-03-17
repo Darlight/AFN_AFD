@@ -2,7 +2,7 @@
 Universidad del Valle de Guatemala
 CC----
 thompson.py
-Proposito: Lexema/leyenda de los inputs ingresados
+Proposito: clasificacion de input
 """
 
 class Token:
