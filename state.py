@@ -1,3 +1,9 @@
+"""
+Universidad del Valle de Guatemala
+CC----
+thompson.py
+Proposito: Representacion de estados en general 
+"""
 #  {a, b, ε}
 class State:
     def __init__(self, name):
