@@ -8,10 +8,14 @@ from lexer import Lexer
 from token import Token
 
 class Parser:
-    def __init__(self, Lexer, pattern) -> None:
+    def __init__(self, pattern):
         self.lexer = Lexer(pattern)
         self.tokens = []
         self.next_token = self.lexer.get_token()
+        
+    def parse(self):
+        self.exp()
+        return self.tokens
     
     def consume(self, name):
         if self.next_token.name == name:
