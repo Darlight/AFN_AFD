@@ -21,6 +21,7 @@ class AFN:
         state_set.add(state)
         for eps in state.epsilon:
             self.addstate(eps, state_set)
+        
     
     def __str__(self) -> str:
         return self.text
@@ -32,16 +33,18 @@ class AFN:
         #for i in current_states:
         #    print(i)
         #print(current_states.keys())
-
+        #print(current_states)
         for c in s:
             #print(s)
             next_states = set()
             #test = "State: {} | Transitions: {}.".format(state,state.transitions[c])
             for state in current_states:
+                #print(state.transitions.keys())
                 if c in state.transitions.keys():
+                    print("State original: {} ".format(state))
+                    
                     trans_state = state.transitions[c]
                     #print("Char: " + c)
-                    #print(trans_state)
                     self.addstate(trans_state, next_states)
                     #print(c)
            

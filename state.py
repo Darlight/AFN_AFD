@@ -13,7 +13,9 @@ class State:
         self.name = name
         self.is_end = False # True --> estado final
         self.text = "State: {} | Transitions: {}. | Epsilons: {}".format(self.name,self.transitions, self.epsilon)
+        self.text3 = "State: {} | Transitions: {}. ".format(self.name,self.transitions)
         self.text2 = "State: {} | Transitions: {}. | final state?: {}".format(self.name,self.transitions, self.is_end)
-        self.text3 = "algo"
+        #self.text3 = "algo"
+    
     def __str__(self) -> str:
-        return self.name
+        return self.text3

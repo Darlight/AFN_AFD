@@ -11,6 +11,7 @@ from parse import Parser
 from token import Token
 from state import State
 
+
 class Thompson:
     def __init__(self):
         self.state_count = 0
@@ -27,8 +28,13 @@ class Thompson:
         return State('s' + str(self.state_count))
     
     def handle_char(self, t, AFN_stack):
+        print("chars")
         s0 = self.create_state()
         s1 = self.create_state()
+        #print("State 0: {} |  State 1: {}".format(s0,s1))
+        print(s0)
+        print(s1)
+       # print(s0.transitions[t.value])
         s0.transitions[t.value] = s1
         afn = AFN(s0, s1)
         AFN_stack.append(afn)
@@ -51,6 +57,9 @@ class Thompson:
         n2.end.epsilon.append(s3)
         n1.end.is_end = False
         n2.end.is_end = False
+        print("alts | : ")
+        print(s0)
+        print(s3)
         afn = AFN(s0, s3)
         AFN_stack.append(afn)
     
@@ -63,6 +72,9 @@ class Thompson:
             s0.epsilon.append(s1)
         n1.end.epsilon.extend([s1, n1.start])
         n1.end.is_end = False
+        print("+ y * ")
+        print(s0)
+        print(s1)
         afn = AFN(s0, s1)
         AFN_stack.append(afn)
 
@@ -75,7 +87,7 @@ n = 20
 p = 'a?' * n + 'a' * n
 print(p)
 """
-def compile(p, debug = False):
+def compile(p):
     
     def print_tokens(tokens):
         for t in tokens:
@@ -87,28 +99,32 @@ def compile(p, debug = False):
 
     handler = Thompson()
 
-
-    if debug:
-        print_tokens(tokens) 
-
-    nfa_stack = []
-    
+    print("Tokens: ")
     print_tokens(tokens)
+    print("\n\n")
+    nfa_stack = []
+    counter = 0
     for t in tokens:
+        #print(t.name)
+        print("Actual Token:  {} \n".format(t))
         handler.constructor[t.name](t, nfa_stack)
-        print(handler.state_count)
+        #print(nfa_stack[0])
+        #print(nfa_stack)
+        #print(handler.state_count)
 
-    for i in nfa_stack:
-        print (i)
-    
+    #for i in nfa_stack:
+    #    print (i)
+    #print(nfa_stack[0])
     assert len(nfa_stack) == 1, "Hubo un fallo o typo en la expresion regular \n "
     return nfa_stack.pop() 
 
 n = 20
 p = 'a?' * n + 'a' * n
 p2 = '(a|b)'
-nfa = compile(p2)
-print(nfa)
 input_string = 'a' * n
-matched = nfa.match('babbaaaaa')
-print(matched) # True
+
+
+nfa = compile(p2)
+#print(nfa)
+matched = nfa.match('a')
+print(matched)
