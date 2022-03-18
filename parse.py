@@ -32,6 +32,7 @@ class Parser:
             self.tokens.append(self.next_token)
             self.consume('CHAR')
     #Esto permite que vaya leyendo la expresion desde el primer parentesis
+    # ademas, 
     def term(self):
         self.factor()
         if self.next_token.value not in ')|':

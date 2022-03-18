@@ -5,6 +5,7 @@ thompson.py
 Proposito: Lexema/leyenda de los inputs ingresados
 """
 from token import Token
+
 class Lexer:
     def __init__(self,pattern):
         self.source = pattern
