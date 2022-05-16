@@ -1,14 +1,14 @@
 """
 Universidad del Valle de Guatemala
 CC----
-thompson.py
+state.py
 Proposito: Representacion de estados en general 
 """
 #  {a, b, ε}
 class State:
     def __init__(self, name):
         self.epsilon = [] #estados vacios
-        #Transiciones del input y haciua el siguiuente estado
+        #Transiciones del input y hacia el siguiuente estado
         self.transitions = {} 
         self.name = name
         self.is_end = False # True --> estado final
@@ -18,4 +18,4 @@ class State:
         #self.text3 = "algo"
     
     def __str__(self) -> str:
-        return self.text3
+        return self.name

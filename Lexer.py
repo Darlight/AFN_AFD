@@ -1,7 +1,6 @@
 """
 Universidad del Valle de Guatemala
-CC----
-thompson.py
+Lexer.py
 Proposito: Lexema/leyenda de los inputs ingresados
 """
 from token import Token

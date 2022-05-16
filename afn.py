@@ -1,8 +1,8 @@
 """
 Universidad del Valle de Guatemala
-CC----
-thompson.py
-Proposito: AFN ya establecido
+afn.py
+Proposito: Automata finito no determinista
+Mario Perdomo 18029
 """
 
 class AFN:
@@ -41,12 +41,12 @@ class AFN:
             for state in current_states:
                 #print(state.transitions.keys())
                 if c in state.transitions.keys():
-                    print("State original: {} ".format(state))
-                    
+                    #print("State original: {} ".format(state))
                     trans_state = state.transitions[c]
-                    #print("Char: " + c)
                     self.addstate(trans_state, next_states)
-                    #print(c)
+                    #print("State next: {} |  state Final".format(trans_state))
+                    #print("Char: " + c)
+                    
            
             current_states = next_states
 

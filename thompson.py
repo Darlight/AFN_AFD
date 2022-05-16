@@ -1,8 +1,8 @@
 """
 Universidad del Valle de Guatemala
-CC----
 thompson.py
 Proposito: clase de un estado usando la construccion de thompson
+Mario Perdomo 18029
 """
 #Thompson's Construction 
 from afn import AFN
@@ -32,9 +32,9 @@ class Thompson:
         s0 = self.create_state()
         s1 = self.create_state()
         #print("State 0: {} |  State 1: {}".format(s0,s1))
-        print(s0)
-        print(s1)
-       # print(s0.transitions[t.value])
+        #print(s0)
+        #print(s1)
+        #print(s1.transitions[t.value])
         s0.transitions[t.value] = s1
         afn = AFN(s0, s1)
         AFN_stack.append(afn)
@@ -57,9 +57,9 @@ class Thompson:
         n2.end.epsilon.append(s3)
         n1.end.is_end = False
         n2.end.is_end = False
-        print("alts | : ")
-        print(s0)
-        print(s3)
+        #print("alts | : ")
+        #print(s0)
+        #print(s3)
         afn = AFN(s0, s3)
         AFN_stack.append(afn)
     
@@ -72,9 +72,9 @@ class Thompson:
             s0.epsilon.append(s1)
         n1.end.epsilon.extend([s1, n1.start])
         n1.end.is_end = False
-        print("+ y * ")
-        print(s0)
-        print(s1)
+        #print("+ y * ")
+        #print(s0)
+        #print(s1)
         afn = AFN(s0, s1)
         AFN_stack.append(afn)
 
@@ -103,7 +103,7 @@ def compile(p):
     print_tokens(tokens)
     print("\n\n")
     nfa_stack = []
-    counter = 0
+
     for t in tokens:
         #print(t.name)
         print("Actual Token:  {} \n".format(t))
@@ -115,15 +115,17 @@ def compile(p):
     #for i in nfa_stack:
     #    print (i)
     #print(nfa_stack[0])
+
+    print("Total de estados creados: {}".format(handler.state_count))
     assert len(nfa_stack) == 1, "Hubo un fallo o typo en la expresion regular \n "
     return nfa_stack.pop() 
 
 n = 20
 p = 'a?' * n + 'a' * n
-p2 = '(a|b)'
+p2 = '*+a)'
 input_string = 'a' * n
-
-
+# 
+# 
 nfa = compile(p2)
 #print(nfa)
 matched = nfa.match('a')

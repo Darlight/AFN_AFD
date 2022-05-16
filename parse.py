@@ -1,18 +1,75 @@
 """
 Universidad del Valle de Guatemala
-CC----
-thompson.py
+parse.py
 Proposito: Orden y consumo de los inputs
 """
+from regex import W
 from lexer import Lexer
-from token import Token
+from tokenTypes import typeToken
+from nodes import *
 
 class Parser:
-    def __init__(self, pattern):
-        self.lexer = Lexer(pattern)
-        self.tokens = []
-        self.next_token = self.lexer.get_token()
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.Next()
+
+    def Next(self):
+        try:
+            self.curr_token = next(self.tokens)
+        except StopIteration:
+            self.curr_token = None
+    
+    def newSymbol(self):
+        token = self.curr_token
+
+        if token.type == typeToken.L_PAREN:
+            self.Next()
+            res = self.Expression()
+
+            if self.curr_token.type != typeToken.R_PAREN:
+                raise Exception('No right Parenthesis for expression!')
+            
+            self.Next()
+            return res
+        elif token.type == typeToken.LETTER:
+            self.Next()
+            return Letter(token.value)
+    def newOperator(self):
+        res = self.newSymbol()
+
+        while self.curr_token != None and \
+        (
+                self.curr_token.type == typeToken.KLEENE or
+                self.curr_token.type == typeToken.PLUS or
+                self.curr_token.type == typeToken.QUESTION
+        ):
+            if self.curr_token.type == typeToken.KLEENE:
+                self.Next(
+                    res = Kleene(res)
+                )
+            elif self.curr_token.type == typeToken.PLUS:
+                self.next(
+                    res = Plus(res)
+                )
+            else:
+                self.Next()
+                res = Question(res)
+        return res
+    def expression(self):
+        res = self.newOperator()
         
+        while self.curr_token != None and \
+            (
+                self.curr_token.type == typeToken.APPEND or
+                self.curr_token.type == typeToken.OR
+            ):
+            if self.curr_token.type == typeToken.OR:
+                self.Next()
+                res = Or(res, self.newOperator())
+
+    def parse(self):
+        print("missin")
+    """
     def parse(self):
         self.exp()
         return self.tokens
@@ -54,5 +111,5 @@ class Parser:
         if self.next_token.name in ['STAR', 'PLUS', 'QMARK']:
             self.tokens.append(self.next_token)
             self.consume(self.next_token.name)
-
+"""
     
